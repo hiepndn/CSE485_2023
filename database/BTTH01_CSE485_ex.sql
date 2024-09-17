@@ -1,3 +1,5 @@
+CREATE DATABASE BTTH01_CSE485
+
 
 select ten_bhat 
 from baiviet
