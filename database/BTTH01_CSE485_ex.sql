@@ -1,4 +1,4 @@
-Use BTTH01_CSE485
+﻿Use BTTH01_CSE485
 
 --a
 select ten_bhat 
@@ -35,4 +35,43 @@ With max_The_loai as (
 select ten_tloai, soluong
 from max_The_loai
 where thuhang = 1
+
+---e---
+Select TOP 1 theloai.ma_tloai, theloai.ten_tloai , Count (baiviet.ma_bviet) AS Sobaiviet
+From theloai 
+join baiviet on theloai.ma_tloai=baiviet.ma_tloai
+Group By theloai.ma_tloai, theloai.ten_tloai
+Order by Sobaiviet DESC
+
+---f---
+Select TOP 2 ten_tgia , Count(ma_bviet) AS Sobaiviet
+From tacgia join baiviet on tacgia.ma_tgia = baiviet.ma_tgia
+Group by ten_tgia
+Order by Sobaiviet DESC;
+
+---g---
+Select tieude from baiviet
+Where ten_bhat LIKE '%yêu%'
+   OR ten_bhat LIKE '%thương%'
+   OR ten_bhat LIKE '%anh%'
+   OR ten_bhat LIKE '%em%';
+
+ ---h---
+Select tieude from baiviet
+Where tieude LIKE '%yêu%'
+   OR tieude LIKE '%thương%'
+   OR tieude LIKE '%anh%'
+   OR tieude LIKE '%em%'
+   OR ten_bhat LIKE '%yêu%'
+   OR ten_bhat LIKE '%thương%'
+   OR ten_bhat LIKE '%anh%'
+   OR ten_bhat LIKE '%em%';
+
+   ---j---
+Create View vw_Music AS
+(Select ten_tloai, ten_tgia
+from tacgia 
+join baiviet on baiviet.ma_tgia= tacgia.ma_tgia
+join theloai on baiviet.ma_tloai= theloai.ma_tloai)
+
 
