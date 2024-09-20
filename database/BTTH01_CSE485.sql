@@ -7,21 +7,21 @@ Use BTTH01_CSE485
 Go
 create table tacgia(
     ma_tgia int primary key not null,
-    ten_tgia nvarchar(100),
+    ten_tgia varchar(100),
     hinh_tgia varchar(100),
 )
 create table theloai(
 	ma_tloai int primary key not null,
-	ten_tloai nvarchar(50),)
+	ten_tloai varchar(50),)
 
 create table baiviet(
 	ma_bviet int primary key not null,
-	tieude nvarchar(200),
-	ten_bhat nvarchar(100),
+	tieude varchar(200),
+	ten_bhat varchar(100),
 	ma_tloai int,
 	foreign key (ma_tloai) references theloai(ma_tloai),
-	tomtat ntext,
-	noidung ntext,
+	tomtat text,
+	noidung text,
 	ma_tgia int,
 	foreign key (ma_tgia) references tacgia(ma_tgia),
 	ngayviet datetime,
@@ -122,11 +122,3 @@ Nhưng việc trồng người luôn cảm thụ với chuyến đò ngang, cứ
 hy sinh thầm lặng.',8, '2014/1/2');
 
 
--- DELETE TABLE AND DATA
-DROP TABLE baiviet
-DROP TABLE theloai
-DROP TABLE tacgia
-
-DELETE FROM baiviet
-DELETE FROM theloai
-DELETE FROM tacgia
