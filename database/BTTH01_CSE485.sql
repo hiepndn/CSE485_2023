@@ -20,8 +20,8 @@ create table baiviet(
 	ten_bhat nvarchar(100),
 	ma_tloai int,
 	foreign key (ma_tloai) references theloai(ma_tloai),
-	tomtat text,
-	noidung text,
+	tomtat ntext,
+	noidung ntext,
 	ma_tgia int,
 	foreign key (ma_tgia) references tacgia(ma_tgia),
 	ngayviet datetime,
@@ -111,13 +111,13 @@ tinh thần và vật chất, mọi thứ trung gian mơ hồ thế đó mà kh�
 
 
 INSERT INTO baiviet (ma_bviet, tieude, ten_bhat, ma_tloai, tomtat, ma_tgia, ngayviet)
-VALUES (12, 'Cây và gió', 'Cây và gió', 7,'Em và anh, hai đứa quen nhau thật tình cờ. 
+VALUES (12, N'Cây và gió', N'Cây và gió', 7,N'Em và anh, hai đứa quen nhau thật tình cờ. 
 Lời hát của anh từ bài hát “Cây và gió” đã làm tâm hồn em xao động. Nhưng sự thật phũ phàng rằng em 
 chưa bao giờ nói cho anh biết những suy nghĩ tận sâu trong tim mình. Bởi vì em nhút nhát, em không dám đối mặt với thực tế khắc nghiệt,
 hay thực ra em không dám đối diện với chính mình.',7, '2013/12/5');
 
 INSERT INTO baiviet (ma_bviet, tieude, ten_bhat, ma_tloai, tomtat, ma_tgia, ngayviet)
-VALUES (13,'Như một cách tạ ơn đời', 'Người thầy', 2,'Ánh nắng cuối ngày rồi cũng sẽ tắt, dòng sông con đò rồi cũng sẽ rẽ sang một hướng khác.
+VALUES (13,N'Như một cách tạ ơn đời', N'Người thầy', 2,N'Ánh nắng cuối ngày rồi cũng sẽ tắt, dòng sông con đò rồi cũng sẽ rẽ sang một hướng khác.
 Nhưng việc trồng người luôn cảm thụ với chuyến đò ngang, cứ tần tảo đưa rồi lặng lẽ quay về đưa sang. Con đò năm xưa của Thầy nặng trĩu yêu thương,
 hy sinh thầm lặng.',8, '2014/1/2');
 
