@@ -1,6 +1,6 @@
 <!--file controll thể loại -->
 <?php  
-        include ('../config/DBconn.php');
+        include '../config/DBconn.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $category_name = $_POST['txtCatName'];
             if (!empty($category_name)) {
@@ -10,7 +10,8 @@
                 }
                 $stmt->bind_param("s", $category_name);
                 if ($stmt->execute()) {
-                    echo "Thêm thể loại mới thành công!";
+                    header('Location: ../views/admin/category.php');
+                    exit();
                 } else {
                     echo "Lỗi khi thực thi câu lệnh: " . $stmt->error;
                 }
@@ -21,3 +22,4 @@
         }
         
     ?>
+
