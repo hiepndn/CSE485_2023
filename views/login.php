@@ -1,3 +1,34 @@
+<?php
+include 'C:\xampp\htdocs\CSE485_2023\config\DBconn.php'; // Kết nối CSDL
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $userName = $_POST['userName'];
+    $pw = $_POST['pw'];
+
+    // Truy vấn để tìm user theo username
+    $sql = "SELECT * FROM users WHERE userName = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $userName);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        // So sánh mật khẩu (đã được mã hóa)
+        if (password_verify($pw, $users['pw'])) {
+            echo "<script>alert('Đăng nhập thành công!');</script>";
+        } else {
+            echo "<script>alert('Sai mật khẩu!');</script>";
+        }
+    } else {
+        echo "<script>alert('Không tìm thấy người dùng!');</script>";
+    }
+
+    $stmt->close();
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

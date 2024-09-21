@@ -27,6 +27,10 @@ create table baiviet(
 	ngayviet datetime,
 	hinhanh varchar(200),
 )
+create table users(
+	userName varchar(50),
+	pw varchar(20),
+)
 
 
 Go
@@ -48,6 +52,8 @@ INSERT INTO theloai VALUES (5, N'Nhạc quê hương');
 INSERT INTO theloai VALUES (6, N'POP');
 INSERT INTO theloai VALUES (7, N'Rock');
 INSERT INTO theloai VALUES (8, N'R&B');
+
+INSERT INTO users VALUES (userName,pw) VALUES (N'Đoàn Hải Duyên','123456');
 
 
 INSERT INTO baiviet (ma_bviet, tieude, ten_bhat, ma_tloai, tomtat, ma_tgia, ngayviet)
