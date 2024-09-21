@@ -58,18 +58,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
-                            <th scope="row"></th>
-                            <td>
-                                <a href="edit_author.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
+                    <?php
+                        include '../../config/DBconn.php'; 
+                        $sql = "SELECT ma_tgia, ten_tgia, hinh_tgia FROM tacgia";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<th scope='row'>" . $row['ma_tgia'] . "</th>";
+                                echo "<td>" . $row['ten_tgia'] . "</td>";
+                                echo "<td>" . $row['hinh_tgia'] . "</td>";
+                                echo "<td> <a href='edit_author.php?id=" . $row['ma_tgia'] . "'><i class='fa-solid fa-pen-to-square'></i></a> </td>";
+                                echo "<td> <a href=''><i class='fa-solid fa-trash'></i></a> </td>";
+                                echo "</tr>";
+                            }
+                        } 
+                        else {
+                            echo "Không có thể loại nào.";
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -80,4 +87,5 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -48,7 +48,7 @@
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
                 <form action="process_add_category.php" method="post">
-                <div class="input-group mt-3 mb-3">
+                    <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatId">Mã thể loại</span>
                         <input type="text" class="form-control" name="txtCatId" readonly value="1">
                     </div>

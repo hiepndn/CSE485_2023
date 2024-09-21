@@ -48,26 +48,38 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin tác giả</h3>
-                <form action="process_add_category.php" method="post">
-                <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblAuthorId">Mã tác giả</span>
-                        <input type="text" class="form-control" name="txtAuthorId" readonly value="1">
-                    </div>
+                <form action="../../controllers/controller_edit_author.php" method="post">
+                    <?php 
+                        include '../../config/DBconn.php';
+                        $id = $_GET['id'];
+                        $sql = "SELECT * from tacgia where ma_tgia = ?";
+                        $temp = $conn -> prepare($sql);
+                        if ($temp === false){
+                            die("Lỗi rồi cu: " . $conn -> error);
+                        }
+                        $temp -> bind_param("i", $id);
+                        $temp->execute();
+                        $result = ($temp->get_result()) -> fetch_assoc();
+                        echo "<div class='input-group mt-3 mb-3'>" ;
+                        echo "<span class='input-group-text' id='lblAuthorId'>Mã tác giả</span>";
+                        echo "<input type='text' class='form-control' name='txtAuthorId' readonly value='" . $result['ma_tgia'] . "'>";
+                        echo "</div>";
 
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblAuthorName">Tên tác giả</span>
-                        <input type="text" class="form-control" name="txtAuthorName" value = "Nhạc trữ tình">
-                    </div>
+                        echo "<div class='input-group mt-3 mb-3'>";
+                        echo "<span class='input-group-text' id='lblAuthorName'>Tên tác giả</span>";
+                        echo "<input type='text' class='form-control' name='txtAuthorName' value = '" . $result['ten_tgia'] . "'>";
+                        echo "</div>";
 
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="imgAuthor">Hình tác giả</span>
-                        <input type="text" class="form-control" name="imgAuthor" value = "Nhạc trữ tình">
-                    </div>
+                        echo "<div class='input-group mt-3 mb-3'>";
+                        echo "<span class='input-group-text' id='imgAuthor'>Hình tác giả</span>";
+                        echo "<input type='file' class='form-control' name='imgAuthor' value = '" . $result['hinh_tgia'] . "'>";
+                        echo "</div>";
 
-                    <div class="form-group  float-end ">
-                        <input type="submit" value="Lưu lại" class="btn btn-success">
-                        <a href="author.php" class="btn btn-warning ">Quay lại</a>
-                    </div>
+                        echo "<div class='form-group  float-end '>";
+                        echo "<input type='submit' value='Lưu lại' class='btn btn-success'>";
+                        echo "<a href='author.php' class='btn btn-warning '>Quay lại</a>";
+                        echo "</div>";
+                    ?>
                 </form>
             </div>
         </div>
