@@ -1,7 +1,7 @@
 <?php 
     include '../config/DBconn.php';
     $id = $_GET['id'];
-    $sql_check = "SELECT * from baiviet where ma_tgia = " . $id;
+    $sql_check = "SELECT * from baiviet where ma_tloai = " . $id;
     $result = $conn -> query($sql_check);
     if ($result -> num_rows != 0){
         $message_error_constraint = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ THỂ LOẠI LÀ " . $id . " RỒI MỚI ĐƯỢC XÓA THỂ LOẠI NÀY";
