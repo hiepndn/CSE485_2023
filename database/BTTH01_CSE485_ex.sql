@@ -3,26 +3,26 @@
 --a
 select ten_bhat 
 from baiviet
-where ma_tloai = 2
+where ma_tloai = 2;
 
 --b
 select * from baiviet 
 inner join tacgia
 on baiviet.ma_tgia=tacgia.ma_tgia
-where tacgia.ten_tgia= N'Nhacvietplus'
+where tacgia.ten_tgia= N'Nhacvietplus';
 
 --c
 select * from theloai
 where ten_tloai not in ( select theloai.ten_tloai from theloai
                          inner join baiviet
                          on theloai.ma_tloai=baiviet.ma_tloai
-                         group by theloai.ten_tloai )
+                         group by theloai.ten_tloai );
 
 --d
 select ma_bviet,tieude,ten_bhat,ten_tgia,ten_tloai,ngayviet
 from baiviet
 inner join tacgia on baiviet.ma_tgia=tacgia.ma_tgia
-join theloai on theloai.ma_tloai=baiviet.ma_tloai
+join theloai on theloai.ma_tloai=baiviet.ma_tloai;
 
 --e
 With max_The_loai as (
@@ -34,7 +34,7 @@ With max_The_loai as (
 ) 
 select ten_tloai, soluong
 from max_The_loai
-where thuhang = 1
+where thuhang = 1;
 
 --f
 Select TOP 2 ten_tgia , Count(ma_bviet) AS Sobaiviet
@@ -65,7 +65,7 @@ Create View vw_Music AS
 (Select ten_tloai, ten_tgia
 from tacgia 
 join baiviet on baiviet.ma_tgia= tacgia.ma_tgia
-join theloai on baiviet.ma_tloai= theloai.ma_tloai)
+join theloai on baiviet.ma_tloai= theloai.ma_tloai);
 
 --j
 DELIMITER //
@@ -88,6 +88,7 @@ BEGIN
     END IF;
 END//
 DELIMITER ;
+
 --k
 ALTER TABLE theloai
 ADD SLBaiViet INT DEFAULT 0;
@@ -101,6 +102,7 @@ BEGIN
     WHERE ma_tloai = NEW.ma_tloai;
 END//
 DELIMITER ;
+
 --l
 CREATE TABLE Users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
