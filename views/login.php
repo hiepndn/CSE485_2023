@@ -11,6 +11,7 @@
 </head>
 <body>
     <header>
+        
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="my-logo">
@@ -52,24 +53,25 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="username" >
-                            </div>
+                    <form method="POST" action="../controllers/controller_login.php">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" name="username" placeholder="username" required>
+                        </div>
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
-                                <input type="text" class="form-control" placeholder="password" >
-                            </div>
-                            
-                            <div class="row align-items-center remember">
-                                <input type="checkbox">Remember Me
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Login" class="btn float-end login_btn">
-                            </div>
-                        </form>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
+                            <input type="password" class="form-control" name="password" placeholder="password" required>
+                        </div>
+
+                        <div class="row align-items-center remember">
+                            <input type="checkbox">Remember Me
+                        </div>
+                         <div class="form-group">
+                         <input type="submit" value="Login" class="btn float-end login_btn">
+                     </div>
+                    </form>
+
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center ">
