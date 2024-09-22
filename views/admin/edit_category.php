@@ -47,21 +47,38 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
-                <form action="process_add_category.php" method="post">
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatId">Mã thể loại</span>
-                        <input type="text" class="form-control" name="txtCatId" readonly value="1">
-                    </div>
+                <form action="../../controllers/controller_edit_category.php" method="post">
+                <?php 
+                        include '../../config/DBconn.php';
+                        $id = $_GET['id'];
+                        $sql = "SELECT * from theloai where ma_tloai = ?";
+                        $temp = $conn -> prepare($sql);
+                        if ($temp === false){
+                            $message_error_query = "LỖI QUERRY: ";
+                            $redirectUrl_error_query = "../views/admin/category.php";
+                            // JavaScript code hiển thị pop-up
+                            echo "<script type='text/javascript'>alert('$message_error_query" . $conn -> error . "');";
+                            echo " window.location.href = '$redirectUrl_error_query';";
+                            echo "</script>;";
+                        }
+                        $temp -> bind_param("i", $id);
+                        $temp->execute();
+                        $result = ($temp->get_result()) -> fetch_assoc();
+                        echo "<div class='input-group mt-3 mb-3'>" ;
+                        echo "<span class='input-group-text' id='lblAuthorId'>Mã tác giả</span>";
+                        echo "<input type='text' class='form-control' name='txtCatId' readonly value='" . $result['ma_tloai'] . "'>";
+                        echo "</div>";
 
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatName">Tên thể loại</span>
-                        <input type="text" class="form-control" name="txtCatName" value = "Nhạc trữ tình">
-                    </div>
+                        echo "<div class='input-group mt-3 mb-3'>";
+                        echo "<span class='input-group-text' id='lblAuthorName'>Tên tác giả</span>";
+                        echo "<input type='text' class='form-control' name='txtCatName' value = '" . $result['ten_tloai'] . "'>";
+                        echo "</div>";
 
-                    <div class="form-group  float-end ">
-                        <input type="submit" value="Lưu lại" class="btn btn-success">
-                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
-                    </div>
+                        echo "<div class='form-group  float-end '>";
+                        echo "<input type='submit' value='Lưu lại' class='btn btn-success'>";
+                        echo "<a href='category.php' class='btn btn-warning '>Quay lại</a>";
+                        echo "</div>";
+                    ?>
                 </form>
             </div>
         </div>
