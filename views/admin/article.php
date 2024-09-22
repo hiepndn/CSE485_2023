@@ -87,7 +87,7 @@
                                 echo "<a href='edit_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-pen-to-square'></i></a>";
                                 echo "</td>";
                                 echo "<td>";
-                                echo "<a href=''><i class='fa-solid fa-trash'></i></a>";
+                                echo "<a href='../../controllers/controller_del_article.php? id=".$row['ma_bviet']."'><i class='fa-solid fa-trash'></i></a>";
                                 echo "</td>";
                                 echo "</tr>";
                                 }

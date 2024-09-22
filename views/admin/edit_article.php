@@ -92,7 +92,7 @@
 
                     echo "<div class='input-group mt-3 mb-3'>";
                     echo "<span class='input-group-text' id='lblCatName'>ngày viết</span>";
-                    echo "<input type='datetime' class='form-control' name='ngay' value ='". $article['ngayviet']."' >";
+                    echo "<input type='date' class='form-control' name='ngay' value ='". $article['ngayviet']."' >";
                     echo "</div>";
 
  ?>
