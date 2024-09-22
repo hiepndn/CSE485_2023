@@ -67,4 +67,45 @@ from tacgia
 join baiviet on baiviet.ma_tgia= tacgia.ma_tgia
 join theloai on baiviet.ma_tloai= theloai.ma_tloai)
 
-
+--j
+DELIMITER //
+CREATE PROCEDURE sp_DSBaiViet(IN ten_theloai VARCHAR(50))
+BEGIN
+    DECLARE ma_tloai INT;
+    
+    -- Kiểm tra thể loại có tồn tại hay không
+    SELECT ma_tloai INTO ma_tloai
+    FROM theloai
+    WHERE ten_tloai = ten_theloai;
+    IF ma_tloai IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Thể loại không tồn tại';
+    ELSE
+        -- Liệt kê bài viết của thể loại
+        SELECT baiviet.ma_bviet, baiviet.tieude AS ten_bviet, baiviet.ten_bhat, tacgia.ten_tgia, baiviet.ngayviet
+        FROM baiviet
+        JOIN tacgia ON baiviet.ma_tgia = tacgia.ma_tgia
+        WHERE baiviet.ma_tloai = ma_tloai;
+    END IF;
+END//
+DELIMITER ;
+--k
+ALTER TABLE theloai
+ADD SLBaiViet INT DEFAULT 0;
+DELIMITER //
+CREATE TRIGGER tg_CapNhatTheLoai
+AFTER INSERT ON baiviet
+FOR EACH ROW
+BEGIN
+    UPDATE theloai
+    SET SLBaiViet = SLBaiViet + 1
+    WHERE ma_tloai = NEW.ma_tloai;
+END//
+DELIMITER ;
+--l
+CREATE TABLE Users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('user', 'admin') DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
