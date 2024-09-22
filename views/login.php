@@ -1,33 +1,71 @@
 <?php
-include 'C:\xampp\htdocs\CSE485_2023\config\DBconn.php'; // Kết nối CSDL
+session_start(); // Bắt đầu phiên
+// Kết nối cơ sở dữ liệu
+include '../config/DBconn.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $userName = $_POST['userName'];
-    $pw = $_POST['pw'];
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+if (isset($_SESSION['username'])) {
+    // Nếu đã đăng nhập, chuyển hướng đến trang phù hợp dựa trên vai trò
+    switch ($_SESSION['role']) {
+        case 'admin':
+            header("Location: views/admin/ndex/dashboard.php");
+            break;
+        case 'admin':
+            header("Location: views/admin/ategory/dashboard.php");
+            break;
+        case 'admin':
+            header("Location: views/admin/add_category/dashboard.php");
+            break;
+    }
+    exit();
+}
+
+// Kiểm tra xem form đăng nhập đã được gửi đi hay chưa
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once '../config/DBconn.php';
+    require_once '../models/model_article.php';
+    require_once '../models/model_author.php';
+    require_once '../models/model_category.php';
+
+    $userName = $_POST['username'];
+    $pw = $_POST['password']; // Sửa đổi tên biến cho đồng bộ
+
 
     // Truy vấn để tìm user theo username
+     
     $sql = "SELECT * FROM users WHERE userName = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $userName);
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
     if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
+        $users = $result->fetch_assoc();
         // So sánh mật khẩu (đã được mã hóa)
+        
         if (password_verify($pw, $users['pw'])) {
-            echo "<script>alert('Đăng nhập thành công!');</script>";
+            // Đăng nhập thành công
+            $_SESSION['username'] = $users['userName'];
+            $_SESSION['password'] = $users['pw'];
+
+            header("Location: views/admin/index/dashboard.php"); // Có thể thay đổi đường dẫn
+            exit();
         } else {
-            echo "<script>alert('Sai mật khẩu!');</script>";
+            $error = "Sai mật khẩu!";
         }
     } else {
-        echo "<script>alert('Không tìm thấy người dùng!');</script>";
+        $error = "Không tìm thấy người dùng!";
     }
 
     $stmt->close();
 }
+?>
 
-
+<?php
+if (isset($error)) {
+    echo "<script>alert('$error');</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <header>
+        
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="my-logo">
@@ -83,24 +122,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="username" >
-                            </div>
+                    <form method="POST" action="">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" name="username" placeholder="username" required>
+                        </div>
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
-                                <input type="text" class="form-control" placeholder="password" >
-                            </div>
-                            
-                            <div class="row align-items-center remember">
-                                <input type="checkbox">Remember Me
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Login" class="btn float-end login_btn">
-                            </div>
-                        </form>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
+                            <input type="password" class="form-control" name="password" placeholder="password" required>
+                        </div>
+
+                        <div class="row align-items-center remember">
+                            <input type="checkbox">Remember Me
+                        </div>
+                         <div class="form-group">
+                         <input type="submit" value="Login" class="btn float-end login_btn">
+                     </div>
+                    </form>
+
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center ">

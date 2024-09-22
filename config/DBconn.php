@@ -6,7 +6,7 @@ $password = "";            // Mật khẩu MySQL (nếu có)
 $dbname = "BTTH01_CSE485"; // Tên cơ sở dữ liệu
 
 // Tạo kết nối
-$conn = new mysqli($servername, $userName, $pw, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Kiểm tra kết nối
 if ($conn->connect_error) {
