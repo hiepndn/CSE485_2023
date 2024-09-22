@@ -1,2 +1,2 @@
 # Nhóm công nghệ phần mềm HTTT3
-Chạy DB trên php my admin 
+Chạy file BTTH01_CSE485.sql trên phpmyadmin 
