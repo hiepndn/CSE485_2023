@@ -12,7 +12,8 @@ create table tacgia(
 );
 create table theloai(
 	ma_tloai int primary key not null AUTO_INCREMENT,
-	ten_tloai varchar(50));
+	ten_tloai varchar(50)
+);
 
 create table baiviet(
 	ma_bviet int primary key not null AUTO_INCREMENT,
@@ -28,8 +29,18 @@ create table baiviet(
 	hinhanh varchar(200)
 );
 
+create table users(
+	id int primary key not null AUTO_INCREMENT,
+	userName varchar(50),
+	pw varchar(20)
+);
+
 
 Go
+
+INSERT INTO users (userName,pw) VALUES ('admin','123456');
+
+
 INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (1, N'Nhacvietplus');
 INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (2, N'Sưu tầm');
 INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (3, N'Sandy');
