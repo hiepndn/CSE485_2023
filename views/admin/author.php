@@ -69,7 +69,7 @@
                                 echo "<td>" . $row['ten_tgia'] . "</td>";
                                 echo "<td>" . $row['hinh_tgia'] . "</td>";
                                 echo "<td> <a href='edit_author.php?id=" . $row['ma_tgia'] . "'><i class='fa-solid fa-pen-to-square'></i></a> </td>";
-                                echo "<td> <a href=''><i class='fa-solid fa-trash'></i></a> </td>";
+                                echo "<td> <a href='../../controllers/controller_del_author.php?id=" . $row['ma_tgia'] . "'><i class='fa-solid fa-trash'></i></a> </td>";
                                 echo "</tr>";
                             }
                         } 
