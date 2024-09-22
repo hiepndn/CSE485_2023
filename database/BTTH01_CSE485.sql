@@ -8,11 +8,11 @@ Go
 create table tacgia(
     ma_tgia int primary key not null AUTO_INCREMENT,
     ten_tgia varchar(100),
-    hinh_tgia varchar(100),
-)
+    hinh_tgia varchar(100)
+);
 create table theloai(
 	ma_tloai int primary key not null AUTO_INCREMENT,
-	ten_tloai varchar(50),)
+	ten_tloai varchar(50));
 
 create table baiviet(
 	ma_bviet int primary key not null AUTO_INCREMENT,
@@ -25,8 +25,8 @@ create table baiviet(
 	ma_tgia int,
 	foreign key (ma_tgia) references tacgia(ma_tgia),
 	ngayviet datetime,
-	hinhanh varchar(200),
-)
+	hinhanh varchar(200)
+);
 
 
 Go
