@@ -15,7 +15,9 @@
                     echo " window.location.href = '$redirectUrl_error_query';";
                     echo "</script>;";
                 }
+
                 $temp->bind_param("ss",$author_name,$authorImg);
+                
                 if ($temp -> execute()){
                     $message_success = "THÊM THÔNG TIN THÀNH CÔNG";
                     $redirectUrl_success = "../views/admin/author.php";

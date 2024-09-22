@@ -76,7 +76,7 @@
                         else {
                             echo "Không có thể loại nào.";
                         }
-                        ?>
+                    ?>
                     </tbody>
                 </table>
             </div>

@@ -6,16 +6,16 @@ Use BTTH01_CSE485
 
 Go
 create table tacgia(
-    ma_tgia int primary key not null,
+    ma_tgia int primary key not null AUTO_INCREMENT,
     ten_tgia varchar(100),
     hinh_tgia varchar(100),
 )
 create table theloai(
-	ma_tloai int primary key not null,
+	ma_tloai int primary key not null AUTO_INCREMENT,
 	ten_tloai varchar(50),)
 
 create table baiviet(
-	ma_bviet int primary key not null,
+	ma_bviet int primary key not null AUTO_INCREMENT,
 	tieude varchar(200),
 	ten_bhat varchar(100),
 	ma_tloai int,
