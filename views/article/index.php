@@ -66,27 +66,42 @@
                     <tbody>
                         <?php
                         // foreach($articles as $article){
-                        //     echo "<p>{$article->getTitle()}</p>";
+                        //     echo "<tr>";
+                        //     echo "<td>" . $row['ma_bviet'] . "</td>";
+                        //     echo "<td>" . $row['tieude'] . "</td>";
+                        //     echo "<td>" . $row['ten_bhat'] . "</td>";
+                        //     echo "<td>" . $row['ma_tloai'] . "</td>";
+                        //     echo "<td>" . $row['tomtat'] . "</td>";
+                        //     echo "<td>" . $row['noidung'] . "</td>";
+                        //     echo "<td>" . $row['ma_tgia'] . "</td>";
+                        //     echo "<td>" . $row['ngayviet'] . "</td>";
+                        //     echo "<td>" . $row['hinhanh'] . "</td>";
+                        //     echo "<td>";
+                        //     echo "<a href='edit_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-pen-to-square'></i></a>";                                    echo "</td>";
+                        //     echo "<td>";
+                        //     echo "<a href='../../controllers/controller_del_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-trash'></i></a>";
+                        //     echo "</td>";
+                        //     echo "</tr>";
                         // }
-                                while($row = $result->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row['ma_bviet'] . "</td>";
-                                    echo "<td>" . $row['tieude'] . "</td>";
-                                    echo "<td>" . $row['ten_bhat'] . "</td>";
-                                    echo "<td>" . $row['ma_tloai'] . "</td>";
-                                    echo "<td>" . $row['tomtat'] . "</td>";
-                                    echo "<td>" . $row['noidung'] . "</td>";
-                                    echo "<td>" . $row['ma_tgia'] . "</td>";
-                                    echo "<td>" . $row['ngayviet'] . "</td>";
-                                    echo "<td>" . $row['hinhanh'] . "</td>";
-                                    echo "<td>";
-                                    echo "<a href='edit_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-pen-to-square'></i></a>";
-                                    echo "</td>";
-                                    echo "<td>";
-                                    echo "<a href='../../controllers/controller_del_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-trash'></i></a>";
-                                    echo "</td>";
-                                    echo "</tr>";
-                                }
+                                // while($row = $result->fetch_assoc()) {
+                                //     echo "<tr>";
+                                //     echo "<td>" . $row['ma_bviet'] . "</td>";
+                                //     echo "<td>" . $row['tieude'] . "</td>";
+                                //     echo "<td>" . $row['ten_bhat'] . "</td>";
+                                //     echo "<td>" . $row['ma_tloai'] . "</td>";
+                                //     echo "<td>" . $row['tomtat'] . "</td>";
+                                //     echo "<td>" . $row['noidung'] . "</td>";
+                                //     echo "<td>" . $row['ma_tgia'] . "</td>";
+                                //     echo "<td>" . $row['ngayviet'] . "</td>";
+                                //     echo "<td>" . $row['hinhanh'] . "</td>";
+                                //     echo "<td>";
+                                //     echo "<a href='edit_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-pen-to-square'></i></a>";
+                                //     echo "</td>";
+                                //     echo "<td>";
+                                //     echo "<a href='../../controllers/controller_del_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-trash'></i></a>";
+                                //     echo "</td>";
+                                //     echo "</tr>";
+                                // }
                         ?> 
                     </tbody>
                 </table>
