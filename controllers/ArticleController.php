@@ -1,11 +1,13 @@
 <?php
+include("services/ArticleService.php");
 class ArticleController{
     // Hàm xử lý hành động index
     public function index(){
         // Nhiệm vụ 1: Tương tác với Services/Models
-        echo "Tương tác với Services/Models from Article";
+        $articelService = new ArticleService();
+        $articles = $articelService->getAllArticles();
         // Nhiệm vụ 2: Tương tác với View
-        echo "Tương tác với View from Article";
+        include("views/article/index.php");
     }
 
     public function add(){
