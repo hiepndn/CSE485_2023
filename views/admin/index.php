@@ -28,13 +28,13 @@
                         <a class="nav-link" href="./">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=article">Thể loại</a>
+                        <a class="nav-link" href="">Thể loại</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link" href="index.php?controller=article">Bài viết</a>
                     </li>
                 </ul>
                 </div>

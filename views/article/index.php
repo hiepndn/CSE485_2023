@@ -43,10 +43,17 @@
 
     </header>
     <main class="container mt-5 mb-5">
+        <?php 
+            if(isset($_GET["msg"])){ 
+                echo '<div class="alert alert-danger mt-3" role="alert">';
+                echo $_GET["msg"]; 
+                echo '</div>';
+            }
+        ?>
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_article.php" class="btn btn-success">Thêm mới</a>
+                <a href="index.php?controller=article&action=create" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -65,43 +72,30 @@
                     </thead>
                     <tbody>
                         <?php
-                        // foreach($articles as $article){
-                        //     echo "<tr>";
-                        //     echo "<td>" . $row['ma_bviet'] . "</td>";
-                        //     echo "<td>" . $row['tieude'] . "</td>";
-                        //     echo "<td>" . $row['ten_bhat'] . "</td>";
-                        //     echo "<td>" . $row['ma_tloai'] . "</td>";
-                        //     echo "<td>" . $row['tomtat'] . "</td>";
-                        //     echo "<td>" . $row['noidung'] . "</td>";
-                        //     echo "<td>" . $row['ma_tgia'] . "</td>";
-                        //     echo "<td>" . $row['ngayviet'] . "</td>";
-                        //     echo "<td>" . $row['hinhanh'] . "</td>";
-                        //     echo "<td>";
-                        //     echo "<a href='edit_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-pen-to-square'></i></a>";                                    echo "</td>";
-                        //     echo "<td>";
-                        //     echo "<a href='../../controllers/controller_del_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-trash'></i></a>";
-                        //     echo "</td>";
-                        //     echo "</tr>";
-                        // }
-                                // while($row = $result->fetch_assoc()) {
-                                //     echo "<tr>";
-                                //     echo "<td>" . $row['ma_bviet'] . "</td>";
-                                //     echo "<td>" . $row['tieude'] . "</td>";
-                                //     echo "<td>" . $row['ten_bhat'] . "</td>";
-                                //     echo "<td>" . $row['ma_tloai'] . "</td>";
-                                //     echo "<td>" . $row['tomtat'] . "</td>";
-                                //     echo "<td>" . $row['noidung'] . "</td>";
-                                //     echo "<td>" . $row['ma_tgia'] . "</td>";
-                                //     echo "<td>" . $row['ngayviet'] . "</td>";
-                                //     echo "<td>" . $row['hinhanh'] . "</td>";
-                                //     echo "<td>";
-                                //     echo "<a href='edit_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-pen-to-square'></i></a>";
-                                //     echo "</td>";
-                                //     echo "<td>";
-                                //     echo "<a href='../../controllers/controller_del_article.php?id=".$row['ma_bviet']."'><i class='fa-solid fa-trash'></i></a>";
-                                //     echo "</td>";
-                                //     echo "</tr>";
-                                // }
+                        if($articles == null){
+                            echo "KHÔNG CÓ DỮ LIỆU";
+                        }
+                        else{
+                            foreach($articles as $row){
+                                echo "<tr>";
+                                echo "<td>" . $row -> getMaBviet() . "</td>";
+                                echo "<td>" . $row -> getTieude()  . "</td>";
+                                echo "<td>" . $row -> getTenBhat() . "</td>";
+                                echo "<td>" . $row -> getMaTloai() . "</td>";
+                                echo "<td>" . $row -> getTomtat() . "</td>";
+                                echo "<td>" . $row -> getNoidung() . "</td>";
+                                echo "<td>" . $row -> getMaTgia() . "</td>";
+                                echo "<td>" . $row -> getNgayviet() . "</td>";
+                                echo "<td>" . $row -> getHinhanh() . "</td>";
+                                echo "<td>";
+                                echo "<a href='edit_article.php?id=".$row -> getMaBviet()."'><i class='fa-solid fa-pen-to-square'></i></a>";                                    
+                                echo "</td>";
+                                echo "<td>";
+                                echo "<a href='../../controllers/controller_del_article.php?id=".$row -> getMaBviet()."'><i class='fa-solid fa-trash'></i></a>";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        }
                         ?> 
                     </tbody>
                 </table>
