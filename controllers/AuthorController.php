@@ -64,20 +64,31 @@ class AuthorController {
     }
 }
 public function delete() {
-    $authorModel = new AuthorModel();
-    
     if (isset($_GET['id'])) {
         $author_id = $_GET['id'];
-        $result = $authorModel->delete_author($author_id);
-        
-        if ($result) {
-            header("Location: index.php?controller=author&action=index&msg=" . urlencode("Xóa tác giả thành công"));
-        } else {
-            header("Location: index.php?controller=author&action=index&msg=" . urlencode("Xóa tác giả không thành công"));
+
+        // Kiểm tra xem có bài viết nào liên quan không
+        if ($this->authorService->checkHasArticles($author_id)) {
+            $msg = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ TÁC GIẢ LÀ " . $author_id . " RỒI MỚI ĐƯỢC XÓA TÁC GIẢ NÀY";
+            header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
+            exit();
         }
+
+        // Nếu không có bài viết, xóa tác giả
+        $authorModel = new AuthorModel();
+        $result = $authorModel->delete_author($author_id);
+
+        if ($result) {
+            $msg = "XÓA THÔNG TIN THÀNH CÔNG";
+        } else {
+            $msg = "XÓA THÔNG TIN KHÔNG THÀNH CÔNG";
+        }
+
+        header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
         exit();
     } else {
-        header("Location: index.php?controller=author&action=index&msg=" . urlencode("Không tìm thấy ID tác giả"));
+        $msg = "Không tìm thấy ID tác giả";
+        header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
         exit();
     }
 }
