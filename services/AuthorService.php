@@ -23,5 +23,18 @@ class AuthorService{
 
         return $authors;
     }
+    public function checkHasArticles($author_id) {
+        $dbConn = new DBConnection(); // Khởi tạo đối tượng DBConnection
+        $conn = $dbConn->getConnection(); // Lấy kết nối
+
+        $sql = "SELECT * FROM baiviet WHERE ma_tgia = :author_id"; // Sử dụng placeholder
+        $stmt = $conn->prepare($sql); // Sử dụng PDO prepare
+        $stmt->bindParam(':author_id', $author_id, PDO::PARAM_INT); // Sử dụng bindParam với PDO
+
+        $stmt->execute();
+        $result = $stmt->fetchAll(); // Lấy tất cả kết quả
+
+        return count($result) > 0; // Trả về true nếu có bài viết
+    }
 }
 ?>

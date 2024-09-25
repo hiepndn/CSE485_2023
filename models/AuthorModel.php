@@ -60,14 +60,14 @@ class AuthorModel {
         return $stmt->execute();
     }
     public function delete_author($author_id) {
-        $dbConn = new DBConnection();
-        $conn = $dbConn->getConnection();
-    
-        $sql = "DELETE FROM tacgia WHERE ma_tgia = :ma_tgia";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':ma_tgia', $author_id);
-        
-        return $stmt->execute();
+        $sql = "DELETE FROM tacgia WHERE ma_tgia = :id"; // Sử dụng placeholder
+        $stmt = $this->conn->prepare($sql); // Sử dụng kết nối đúng
+
+        if ($stmt) {
+            $stmt->bindParam(':id', $author_id, PDO::PARAM_INT); // Liên kết tham số
+            return $stmt->execute(); // Trả về true/false
+        }
+        return false; // Trả về false nếu không thể chuẩn bị câu lệnh
     }
     
 }
