@@ -2,7 +2,7 @@
 
 class DBConnection{
     private $conn=null;
-
+    
     public function __construct(){
          // B1. Kết nối DB Server
          try {
