@@ -88,7 +88,7 @@
                                 echo "<td>" . $row -> getNgayviet() . "</td>";
                                 echo "<td>" . $row -> getHinhanh() . "</td>";
                                 echo "<td>";
-                                echo "<a href='edit_article.php?id=".$row -> getMaBviet()."'><i class='fa-solid fa-pen-to-square'></i></a>";                                    
+                                echo "<a href='index.php?controller=article&action=edit&id=".$row -> getMaBviet()."'><i class='fa-solid fa-pen-to-square'></i></a>";                                    
                                 echo "</td>";
                                 echo "<td>";
                                 echo "<a href='../../controllers/controller_del_article.php?id=".$row -> getMaBviet()."'><i class='fa-solid fa-trash'></i></a>";
