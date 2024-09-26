@@ -78,23 +78,32 @@ class CategoryService {
             die("Lỗi cập nhật: " . $e->getMessage());
         }
     }
-    // Kiểm tra xem thể loại có bài viết không
     public function hasArticles($id) {
-        $sql_check = "SELECT * FROM baiviet WHERE ma_tloai = ?";
-        $stmt = $this->conn->prepare($sql_check);
-        stmt->bind_param("i", $id);
+        $db = new DBConnection();
+        $conn = $db->getConnection();
+        
+        $sql = "SELECT * FROM baiviet WHERE ma_tloai = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->num_rows > 0;
-}
-
-    // Xóa thể loại
+        
+        return $stmt->rowCount() > 0; // Trả về true nếu có bài viết
+    }
+    
     public function deleteCategory($id) {
-        $sql = "DELETE FROM theloai WHERE ma_tloai = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        return $stmt->execute();
-}
+        try {
+            $db = new DBConnection();
+            $conn = $db->getConnection();
+            
+            $sql = "DELETE FROM theloai WHERE ma_tloai = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 
 ?>

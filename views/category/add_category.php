@@ -55,11 +55,11 @@
 
                     <div class="form-group  float-end ">
                         <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
+                        <a href="index.php?controller=category" class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
             </div>
-        </div>
+        </div>index.php?controller=category
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>

@@ -1,16 +1,3 @@
-<?php
-/*require_once 'index.php?controller=CategoryController';
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $categoryController = new CategoryController();
-    $categoryController->delete($id);
-} else {
-    // Chuyển hướng về danh sách thể loại nếu không có ID
-    header("Location:index.php?controller=category");
-    exit();
-}*/
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +77,7 @@ if (isset($_GET['id'])) {
                                     echo "<a href='index.php?controller=category&action=edit&id=".$row -> getMaTloai()."'><i class='fa-solid fa-pen-to-square'></i></a>";                                    
                                     echo "</td>";
                                     echo "<td>";
-                                    echo "<a href='index.php?controller=category&action=del&id=".$row -> getTenTloai()."'><i class='fa-solid fa-trash'></i></a>";
+                                    echo "<a href='index.php?controller=category&action=delete&id=" . $row->getMaTloai() . "'><i class='fa-solid fa-trash'></i></a>";
                                     echo "</td>";
                                     echo "</tr>";
                             }

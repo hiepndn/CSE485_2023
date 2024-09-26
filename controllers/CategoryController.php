@@ -35,26 +35,11 @@ class CategoryController {
 
     // Phương thức edit để hiển thị form chỉnh sửa thể loại
     public function edit() {
-        // Kiểm tra xem có ID trong GET không
-        if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $category = $this->categoryService->getCategoryById($id); // Gọi đúng đối tượng
-            
-            // Kiểm tra xem thể loại có tồn tại hay không
-            if ($category) {
-                // Chuyển tới view chỉnh sửa
-                include 'views/category/edit_category.php'; // Thay thế đường dẫn cho đúng
-            } else {
-                // Nếu không tìm thấy thể loại, chuyển hướng về danh sách thể loại
-                header("Location: index.php?controller=categor&msg=Thể loại không tồn tại.");
-                exit();
-            }
-        } else {
-            // Nếu không có ID, chuyển hướng về danh sách thể loại
-            header("Location: index.php?controller=category&msg=ID không hợp lệ.");
-            exit();
+            include 'views/category/edit_category.php'; 
+
         }
-    }
 
     // Cập nhật thông tin thể loại
     public function update() {
@@ -76,25 +61,52 @@ class CategoryController {
         }
     }
     //xoa
-    public function delete($id) {
-        if ($this->categoryModel->hasArticles($id)) {
-            $message_error_constraint = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ THỂ LOẠI LÀ " . $id . " RỒI MỚI ĐƯỢC XÓA THỂ LOẠI NÀY";
-            $redirectUrl_error_constraint = "../views/admin/article.php";
+    public function delete() {
+        // Kiểm tra nếu thể loại có bài viết trước khi xóa
+        if ($this->categoryService->hasArticles($id)) {
+            $message_error_constraint = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ THỂ LOẠI " . $id . " RỒI MỚI ĐƯỢC XÓA THỂ LOẠI NÀY";
             echo "<script type='text/javascript'>alert('$message_error_constraint');";
-            echo " window.location.href = '$redirectUrl_error_constraint';</script>";
+            echo "window.location.href = 'index.php?controller=category&action=index';</script>";
         } else {
-            if ($this->categoryModel->deleteCategory($id)) {
+            if ($this->categoryService->deleteCategory($id)) {
                 $message_success = "XÓA THÔNG TIN THÀNH CÔNG";
-                $redirectUrl_success = "../views/admin/category.php";
                 echo "<script type='text/javascript'>alert('$message_success');";
-                echo " window.location.href = '$redirectUrl_success';</script>";
+                echo "window.location.href = 'index.php?controller=category&action=index';</script>";
             } else {
-                $message_error_execute = "LỖI EXECUTE: ";
-                $redirectUrl_error_execute = "../views/admin/category.php?id=" . $id;
-                echo "<script type='text/javascript'>alert('$message_error_execute');";
-                echo " window.location.href = '$redirectUrl_error_execute';</script>";
+                echo "Lỗi khi xóa thể loại.";
             }
         }
     }
+    
+
+    public function delete() {
+    if (isset($_GET['id'])) {
+        $author_id = $_GET['id'];
+
+        // Kiểm tra xem có bài viết nào liên quan không
+        if ($this->authorService->checkHasArticles($author_id)) {
+            $msg = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ TÁC GIẢ LÀ " . $author_id . " RỒI MỚI ĐƯỢC XÓA TÁC GIẢ NÀY";
+            header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
+            exit();
+        }
+
+        // Nếu không có bài viết, xóa tác giả
+        $authorModel = new AuthorModel();
+        $result = $authorModel->delete_author($author_id);
+
+        if ($result) {
+            $msg = "XÓA THÔNG TIN THÀNH CÔNG";
+        } else {
+            $msg = "XÓA THÔNG TIN KHÔNG THÀNH CÔNG";
+        }
+
+        header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
+        exit();
+    } else {
+        $msg = "Không tìm thấy ID tác giả";
+        header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
+        exit();
+    }
+}
 }
 ?>

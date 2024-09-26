@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
-                <form action="index.php?controller=category&action=edit" method="post">
+                <form action="index.php?controller=category&action=update" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text">Mã thể loại</span>
                         <input type="text" class="form-control" name="txtCatId" readonly value="<?= htmlspecialchars($category['ma_tloai']) ?>">
