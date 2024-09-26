@@ -71,5 +71,15 @@ class ArticleService{
         $temp = $conn->prepare($sql);
         $temp -> execute(['tieude' => $title, 'ten_bhat' => $song, 'ma_tloai' => $maTL, 'tomtat' => $sumary, 'noidung' => $noidung, 'ma_tgia' => $maTG, 'ngayviet' => $ngay, 'hinhanh' => $img, 'ma_bviet' => $id]);
     }
+
+    public function del($id){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+        $sql = "DELETE from baiviet WHERE ma_bviet = :id";
+        $temp = $conn -> prepare($sql);
+        $temp->execute(['id' => $id]);
+        $result = $temp->fetchAll();
+        return count($result);
+    }
 }
 ?>

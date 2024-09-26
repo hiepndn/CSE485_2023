@@ -56,8 +56,21 @@ class ArticleController{
             header('Location: index.php?controller=article&action=edit&id='.$id.'&msg=Yêu cầu nhập mã tác giả hoặc mã thể loại tồn tại trong hệ thống');
         }
         else{
-            $articelService->addArticle($title, $song, $sumary, $maTG, $maTL, $ngay, $noidung, $img,$id);
+            $articelService->update($title, $song, $maTL, $sumary, $noidung, $maTG, $ngay, $img,$id);
             header("Location: index.php?controller=article");
         }
+    }
+
+    public function del(){
+        $id = $_GET['id'];
+        $articelService = new ArticleService();
+        $result = $articelService -> del($id);
+        if($result==0){
+            $msg = "Xóa thông tin thành công";
+        }
+        else{
+            $msg = "Xóa thông tin không thành công";
+        }
+        header("Location: index.php?controller=article&msg=" . urlencode($msg));
     }
 }
