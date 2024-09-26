@@ -61,8 +61,11 @@ class CategoryController {
         }
     }
     //xoa
-    public function delete() {
+
+     public function delete() {
         // Kiểm tra nếu thể loại có bài viết trước khi xóa
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
         if ($this->categoryService->hasArticles($id)) {
             $message_error_constraint = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ THỂ LOẠI " . $id . " RỒI MỚI ĐƯỢC XÓA THỂ LOẠI NÀY";
             echo "<script type='text/javascript'>alert('$message_error_constraint');";
@@ -77,36 +80,7 @@ class CategoryController {
             }
         }
     }
-    
-
-    public function delete() {
-    if (isset($_GET['id'])) {
-        $author_id = $_GET['id'];
-
-        // Kiểm tra xem có bài viết nào liên quan không
-        if ($this->authorService->checkHasArticles($author_id)) {
-            $msg = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ TÁC GIẢ LÀ " . $author_id . " RỒI MỚI ĐƯỢC XÓA TÁC GIẢ NÀY";
-            header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
-            exit();
-        }
-
-        // Nếu không có bài viết, xóa tác giả
-        $authorModel = new AuthorModel();
-        $result = $authorModel->delete_author($author_id);
-
-        if ($result) {
-            $msg = "XÓA THÔNG TIN THÀNH CÔNG";
-        } else {
-            $msg = "XÓA THÔNG TIN KHÔNG THÀNH CÔNG";
-        }
-
-        header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
-        exit();
-    } else {
-        $msg = "Không tìm thấy ID tác giả";
-        header("Location: index.php?controller=author&action=index&msg=" . urlencode($msg));
-        exit();
-    }
 }
+    
 }
 ?>
