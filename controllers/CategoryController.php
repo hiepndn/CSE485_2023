@@ -17,10 +17,11 @@ class CategoryController {
             $categoryService = new CategoryService();
             $category = $categoryService->addCategory( $_POST['txtCatName'] );
             if ($category) {
-                header("Location: index.php?controller=category");
+                $msg = "THÊM THỂ LOẠI THÀNH CÔNG";
+                header("Location: index.php?controller=category&action=index&msg=".urlencode($msg));
                 exit();
             } else {
-                $error = "Lỗi.";
+                $error = "LỖI.";
             }
         }
         // Nhiệm vụ 2: Tương tác với View
@@ -66,21 +67,26 @@ class CategoryController {
         // Kiểm tra nếu thể loại có bài viết trước khi xóa
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-        if ($this->categoryService->hasArticles($id)) {
-            $message_error_constraint = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ THỂ LOẠI " . $id . " RỒI MỚI ĐƯỢC XÓA THỂ LOẠI NÀY";
-            echo "<script type='text/javascript'>alert('$message_error_constraint');";
-            echo "window.location.href = 'index.php?controller=category&action=index';</script>";
-        } else {
-            if ($this->categoryService->deleteCategory($id)) {
-                $message_success = "XÓA THÔNG TIN THÀNH CÔNG";
-                echo "<script type='text/javascript'>alert('$message_success');";
-                echo "window.location.href = 'index.php?controller=category&action=index';</script>";
-            } else {
-                echo "Lỗi khi xóa thể loại.";
+            if ($this->categoryService->hasArticles($id)) {
+            $mgs = "VUI LÒNG XÓA BÀI VIẾT CÓ MÃ THỂ LOẠI " . $id . " RỒI MỚI ĐƯỢC XÓA THỂ LOẠI NÀY";
+            header("Location: index.php?controller = category&action = index&mgs=".urlencode($mgs));
+            exit();
             }
-        }
-    }
-}
+            $categoryService = new CategoryService();
+            $result = $categoryService->deleteCategory($id);
+            if ($result) {
+                $msg = "XÓA THÔNG TIN THÀNH CÔNG";
+            } else {
+                $msg = "XÓA THÔNG TIN KHÔNG THÀNH CÔNG";
+            } 
+            header("Location: index.php?controller=category&action=index&msg=" . urlencode($msg));
+            exit();
+        }else{
+            $msg = "Không tìm thấy ID tác giả";
+            header("Location: index.php?controller=category&action=index&msg=" . urlencode($msg));
+            exit();
+            }
+     }
     
 }
 ?>
