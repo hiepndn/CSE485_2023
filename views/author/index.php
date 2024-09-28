@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
-                    <a class="navbar-brand" href="index.php?controller=admin">Administration</a>
+                    <a class="navbar-brand" href="#">Administration</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,13 +28,13 @@
                         <a class="nav-link" href="index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="index.php?controller=category">Thể loại</a>
+                        <a class="nav-link" href="index.php?controller=category">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=author">Tác giả</a>
+                        <a class="nav-link active fw-bold" href="index.php?controller=author">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="index.php?controller=article">Bài viết</a>
+                        <a class="nav-link" href="index.php?controller=article">Bài viết</a>
                     </li>
                 </ul>
                 </div>
@@ -53,60 +53,49 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="index.php?controller=article&action=create" class="btn btn-success">Thêm mới</a>
+                <a href="index.php?controller=author&action=create" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Mã bài viết</th>
-                            <th scope="col">Tiêu đề</th>
-                            <th scope="col">Tên bài hát</th>
-                            <th scope="col">Mã thể loại</th>
-                            <th scope="col">Tóm tắt</th>
-                            <th scope="col">Nội dung</th>
-                            <th scope="col">Mã tác giả</th>
-                            <th scope="col">Ngày viết</th>
-                            <th scope="col">Hình ảnh</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên tác giả</th>
+                            <th scope="col">Hình tác giả</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        if($articles == null){
+                    <?php
+                    
+                        if($authors == null){
                             echo "KHÔNG CÓ DỮ LIỆU";
                         }
                         else{
-                            foreach($articles as $row){
+                            foreach($authors as $row){
                                 echo "<tr>";
-                                echo "<td>" . $row -> getMaBviet() . "</td>";
-                                echo "<td>" . $row -> getTieude()  . "</td>";
-                                echo "<td>" . $row -> getTenBhat() . "</td>";
-                                echo "<td>" . $row -> getMaTloai() . "</td>";
-                                echo "<td>" . $row -> getTomtat() . "</td>";
-                                echo "<td>" . $row -> getNoidung() . "</td>";
-                                echo "<td>" . $row -> getMaTgia() . "</td>";
-                                echo "<td>" . $row -> getNgayviet() . "</td>";
-                                echo "<td>" . $row -> getHinhanh() . "</td>";
+                                echo "<td>" . $row -> getMaTacgia() . "</td>";
+                                echo "<td>" . $row -> getTenTgia()  . "</td>";
+                                echo "<td>" . $row -> getHinhTgia() . "</td>";
                                 echo "<td>";
-                                echo "<a href='index.php?controller=article&action=edit&id=".$row -> getMaBviet()."'><i class='fa-solid fa-pen-to-square'></i></a>";                                    
+                                echo "<a href='index.php?controller=author&action=edit&id= ".$row -> getMaTacgia()."'><i  class='fa-solid fa-pen-to-square'></i></a>";                                    
                                 echo "</td>";
                                 echo "<td>";
-                                echo "<a href='index.php?controller=article&action=del&id=".$row -> getMaBviet()."'><i class='fa-solid fa-trash'></i></a>";
+                                echo "<a href='index.php?controller=author&action=delete&id=" . $row->getMaTacgia() . "' onclick=\"return confirm('Bạn có chắc chắn muốn xóa tác giả này?');\"><i class='fa-solid fa-trash'></i></a>";
                                 echo "</td>";
+
                                 echo "</tr>";
                             }
                         }
-                        ?> 
+                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
-
-    
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
-</html> 
+
+</html>
